@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 ###############################################################################
-# UseVoteGer 4.07 Bounce-Verarbeitung
-# (c) 2001-2004 Marc Langer <uv@marclanger.de>
+# UseVoteGer 4.09 Bounce-Verarbeitung
+# (c) 2001-2005 Marc Langer <uv@marclanger.de>
 # 
 # This script package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Public License as published by the
@@ -33,7 +33,7 @@ my %opt_ctl = ();
 my %bounces = ();
 my $pop3 = 0;
 
-print STDERR "\n$usevote_version Bounce-Verarbeitung - (c) 2001-2004 Marc Langer\n\n";
+print STDERR "\n$usevote_version Bounce-Verarbeitung - (c) 2001-2005 Marc Langer\n\n";
 
 # unknown parameters remain in @ARGV (for "help")
 Getopt::Long::Configure(qw(pass_through bundling));
