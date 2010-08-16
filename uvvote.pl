@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 ###############################################################################
-# UseVoteGer 4.07 Wahldurchfuehrung
-# (c) 2001-2004 Marc Langer <uv@marclanger.de>
+# UseVoteGer 4.09 Wahldurchfuehrung
+# (c) 2001-2005 Marc Langer <uv@marclanger.de>
 # 
 # This script package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Public License as published by the
@@ -37,7 +37,7 @@ use UVtemplate;
 my $clean = 0;
 my %opt_ctl = ();
 
-print "\n$usevote_version Wahldurchfuehrung - (c) 2001-2004 Marc Langer\n\n";
+print "\n$usevote_version Wahldurchfuehrung - (c) 2001-2005 Marc Langer\n\n";
 
 # unknown parameters remain in @ARGV (for "help")
 Getopt::Long::Configure(qw(pass_through bundling));
@@ -123,7 +123,7 @@ if ($clean) {
   my $ext = time;
 
   opendir (TMP, $config{tmpdir});
-  my @tmpfiles = readdir (TMP);
+  my @tmpfiles = readdir (DIR);
   closedir (TMP);
   opendir (FERTIG, $config{archivedir});
   my @fertigfiles = readdir (FERTIG);
@@ -216,7 +216,7 @@ sub process_vote {
   my @header = split(/\n/, $entity->stringify_header);
   my $head = $entity->head;
   my $msgid = $head->get('Message-ID');
-  chomp($msgid) if defined($msgid);
+  chomp($msgid) if ($msgid);
 
   my @votes = ();              # the votes
   my @set;                     # interactively changed fields
