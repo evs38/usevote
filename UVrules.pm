@@ -149,10 +149,10 @@ sub read_rulefile {
       die $errortext . ": $_\n\n" if ($errortext);
  
       # check for correct characters in conditions
-      if ($if !~ /^[JjNnEeSsHhIi\.]+$/) {
+      if ($if !~ /^[JjNnEeSsIi\.]+$/) {
         die UVmessage::get ("RULES_INVCHARS", (NUM=>$num+1, TYPE=>"if")) . ": $if\n\n";
 
-      } elsif ($then !~ /^[JjNnEeSsHhIi\.]+$/) {
+      } elsif ($then !~ /^[JjNnEeSsIi\.]+$/) {
         die UVmessage::get ("RULES_INVCHARS",
                             (NUM=>$num+1, TYPE=>"if")) . ": $then\n\n";
       }
@@ -194,9 +194,8 @@ sub read_rulefile {
 sub make_regex_pos {
   my $pat = $_[0];
  
-  $pat =~ s/[hijens]/./g;
+  $pat =~ s/[jens]/./g;
   $pat =~ s/S/[JN]/g;
-  $pat =~ s/H/[EJ]/g;
   $pat =~ s/I/[EN]/g;
  
   return $pat;
@@ -217,19 +216,22 @@ sub make_regex_neg {
  
   # upper case characters are replaced with dots
   # (are covered by make_regex_pos)
-  $pat =~ s/[HIJENS]/./g;
+  $pat =~ s/[JENS]/./g;
  
   # reverse lower case characters
   $pat =~ s/j/[NE]/g;
   $pat =~ s/n/[JE]/g;
   $pat =~ s/e/[JN]/g;
   $pat =~ s/s/E/g;
-  $pat =~ s/h/N/g;
   $pat =~ s/i/J/g;
  
-  # If the string contained only upper case characters they are now all
-  # replaced with dots and the RegEx would match everything, i.e. declare
-  # every vote as invalid. In this case an empty pattern is returned.
+  # to be translated:
+  # Falls keine Kleinbuchstaben vorkamen (es sind nur Punkte uebrig):
+  # Wenn keine optionalen Forderungen vorhanden sind, wuerde der Regex
+  # immer matchen und somit die Stimme immer als nicht passend erkannt
+  # werden. Deswegen wird versucht auf den leeren String zu ueberpruefen,
+  # was durch die Negation dazu fuehrt, dass die Stimme als passend 
+  # gewertet wird.
   $pat =~ s/^\.+$//;
  
   return $pat;
@@ -303,10 +305,6 @@ sub rule_print {
       $fill = "    $and ";
       $text1 = UVmessage::get ("RULES_IFCLAUSE",
                                (VOTE=>"$yes $or $no", GROUP=>$groups[$i]));
-    } elsif ($rule[$i] eq 'H') {
-      $fill = "    $and ";
-      $text1 = UVmessage::get ("RULES_IFCLAUSE",
-                               (VOTE=>"$abst $or $yes", GROUP=>$groups[$i]));
     } elsif ($rule[$i] eq 'I') {
       $fill = "    $and ";
       $text1 = UVmessage::get ("RULES_IFCLAUSE",
@@ -324,10 +322,6 @@ sub rule_print {
       $fill = "    $or ";
       $text1 = UVmessage::get ("RULES_IFCLAUSE",
                                (VOTE=>"$yes $or $no", GROUP=>$groups[$i]));
-    } elsif ($rule[$i] eq 'h') {
-      $fill = "    $or ";
-      $text1 = UVmessage::get ("RULES_IFCLAUSE",
-                               (VOTE=>"$abst $or $yes", GROUP=>$groups[$i]));
     } elsif ($rule[$i] eq 'i') {
       $fill = "    $or ";
       $text1 = UVmessage::get ("RULES_IFCLAUSE",
@@ -363,10 +357,6 @@ sub rule_print {
       $fill = "    $and ";
       $text1 = UVmessage::get ("RULES_THENCLAUSE",
                                (VOTE=>"$yes $or $no", GROUP=>$groups[$i]));
-    } elsif ($rule[$i] eq 'H') {
-      $fill = "    $and ";
-      $text1 = UVmessage::get ("RULES_THENCLAUSE",
-                               (VOTE=>"$abst $or $yes", GROUP=>$groups[$i]));
     } elsif ($rule[$i] eq 'I') {
       $fill = "    $and ";
       $text1 = UVmessage::get ("RULES_THENCLAUSE",
@@ -384,10 +374,6 @@ sub rule_print {
       $fill = "    $or ";
       $text1 = UVmessage::get ("RULES_THENCLAUSE",
                                (VOTE=>"$yes $or $no", GROUP=>$groups[$i]));
-    } elsif ($rule[$i] eq 'h') {
-      $fill = "    $or ";
-      $text1 = UVmessage::get ("RULES_THENCLAUSE",
-                               (VOTE=>"$abst $or $yes", GROUP=>$groups[$i]));
     } elsif ($rule[$i] eq 'i') {
       $fill = "    $or ";
       $text1 = UVmessage::get ("RULES_THENCLAUSE",

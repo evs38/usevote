@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 ###############################################################################
-# UseVoteGer 4.09 Personalisierte Wahlscheine
-# (c) 2001-2005 Marc Langer <uv@marclanger.de>
+# UseVoteGer 4.07 Personalisierte Wahlscheine
+# (c) 2001-2004 Marc Langer <uv@marclanger.de>
 # 
 # This script package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Public License as published by the
@@ -35,7 +35,7 @@ use UVtemplate;
 
 my %opt_ctl = ();
 
-print "\n$usevote_version Personalisierte Wahlscheine - (c) 2001-2005 Marc Langer\n\n";
+print "\n$usevote_version Personalisierte Wahlscheine - (c) 2001-2004 Marc Langer\n\n";
 
 # unknown parameters remain in @ARGV (for "help")
 Getopt::Long::Configure(qw(pass_through bundling));

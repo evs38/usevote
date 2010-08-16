@@ -30,14 +30,12 @@
 #   N	eine NEIN-Stimme
 #   E	eine Enthaltung
 #   S	eine JA- oder NEIN-Stimme
-#   H   eine Enthaltung oder JA-Stimme
 #   I   eine Enthaltung oder NEIN-Stimme
 #   .	egal (Ja, nein oder Enthaltung)
 #   j	eine oder mehrere der markierten Gruppen hat JA-Stimme
 #   n	 ""   ""    ""     ""     ""       ""    ""  NEIN-Stimme
 #   e	 ""   ""    ""     ""     ""       ""    ""  Enthaltung
 #   s	 ""   ""    ""     ""     ""       ""    ""  Ja- oder Nein-Stimme
-#   h	 ""   ""    ""     ""     ""       ""    ""  Enthaltung oder Ja-Stimme
 #   i	 ""   ""    ""     ""     ""       ""    ""  Enthaltung oder Nein-Stimme
 #
 # Alles klar?  Jede Stimme wird mit den Symbolen verglichen, und wenn alle
