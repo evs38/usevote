@@ -122,9 +122,9 @@ if ($clean) {
   # normally unixtime is sufficient, if it is not unique append our PID
   my $ext = time;
 
-  opendir (TMP, $config{tmpdir});
+  opendir (DIR, $config{tmpdir});
   my @tmpfiles = readdir (DIR);
-  closedir (TMP);
+  closedir (DIR);
   opendir (FERTIG, $config{archivedir});
   my @fertigfiles = readdir (FERTIG);
   closedir (FERTIG);
