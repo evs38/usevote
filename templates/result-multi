@@ -17,7 +17,7 @@ Es wurden [$numvalid] gueltige Stimmen abgegeben.
  Ja  Nein : 2/3? >=60? : ang.? : Gruppe
 ---- ---- : ---- ----- : ----- : ---------------------------------------
 [@count|[$yes] [$no] : [?cond1| Ja |Nein] [?cond2| Ja |Nein]  : [?result| Ja |Nein]  : [$group-first]
-[@group-more|          :            :       : [$line]|\n]\n]
+[@group-more|          :            :       : [$line]\n]\n]
 [?numabstain|[$numabstain-formatted] Enthaltungen]
 [?numinvalid|[$numinvalid] ungueltige Stimme(n)]
 
