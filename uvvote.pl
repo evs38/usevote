@@ -224,6 +224,7 @@ sub process_vote {
   my $onevote = 0;             # 0=no votes, 1=everything OK, 2=vote cancelled
   my $voteerror = "";          # error message in case of invalid vote
   my $ballot_id = "";          # ballot id (German: Wahlscheinkennung)
+  my $voting = "";             # voting (should be votename)
 
   # found address?
   if ($voter_addr) {
@@ -237,6 +238,14 @@ sub process_vote {
   } else {
     # found no address in mail (perhaps violates RFC?)
     push (@errors, 'InvalidAddress');
+  }
+
+  # correct voting?
+  if ($$body =~ /\Q$config{ballotintro}\E\s+(.+?)\s*$/m) {
+    $voting = $1;
+    push (@errors, 'WrongVoting') if ($config{votename} !~ /^\s*\Q$voting\E\s*$/);
+  } else {
+    push (@errors, 'NoVoting');
   }
 
   # personalized ballots?
@@ -343,7 +352,7 @@ sub process_vote {
   # Errors encountered?
   if (@errors) {
     my $res = UVmenu::menu(\@votes, \@header, $body, \$voter_addr, \$voter_name,
-                           \$ballot_id, \@set, \@errors);
+                           \$ballot_id, \$voting, \@set, \@errors);
     return 0 if ($res eq 'i');      # "Ignore": Ignore vote, don't save
 
     my $tpl;
@@ -402,6 +411,12 @@ sub process_vote {
       my $msg = $template->processTemplate($config{tpl_bdsg_error});
       UVsendmail::mail($voter_addr, "Fehler", $msg, $msgid) if ($config{voteack});
       return 0;
+    } elsif ($error{NoVoting} or $error{WrongVoting}) {
+      $voteerror = UVmessage::get("VOTE_WRONG_VOTING");
+      my $template = UVtemplate->new();
+      $template->setKey('body'  => $$body);
+      my $msg = $template->processTemplate($config{tpl_wrong_voting});
+      UVsendmail::mail($voter_addr, "Fehler", $msg, $msgid) if ($config{voteack});
     } elsif ($error{NoVote}) {
       $voteerror = UVmessage::get("VOTE_NO_VOTES");
       my $template = UVtemplate->new();
