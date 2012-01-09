@@ -158,7 +158,7 @@ if ($clean) {
 
   # no mails: exit here
   unless ($count) {
-    print UVmessage::get("VOTE_NO_VOTES") . "\n\n";
+    print UVmessage::get("VOTE_NO_VOTEMAILS") . "\n\n";
     exit 0;
   }
 
