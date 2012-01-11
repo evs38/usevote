@@ -241,8 +241,9 @@ sub process_vote {
   }
 
   # correct voting?
-  if ($$body =~ /\Q$config{ballotintro}\E\s+(.+?)\s*$/m) {
+  if ($$body =~ /\Q$config{ballotintro}\E\s+(.+?)\s*\n(.*?[\t ]+(\S+.+)\s*$)?/m) {
     $voting = $1;
+    $voting .= " $3" if defined($3);
     push (@errors, 'WrongVoting') if ($config{votename} !~ /^\s*\Q$voting\E\s*$/);
   } else {
     push (@errors, 'NoVoting');
