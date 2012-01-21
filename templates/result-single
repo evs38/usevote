@@ -8,7 +8,8 @@ votename-text-more    := value votename | drop-words 30 | create-lines 72
 
 Ergebnisse [$votename-first]
 [@votename-more|           [$line]\n]
-([$numvalid] gueltige Stimmen)
+
+Es wurden [$numvalid] gueltige Stimmen abgegeben.
 
 Es gab [$yes] Ja-Stimmen und [$no] Nein-Stimmen[?numabstain| bei [$numabstain] Enthaltungen].
 [?numinvalid|[$numinvalid] Stimme(n) wurden als ungueltig gewertet.]
