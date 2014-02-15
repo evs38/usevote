@@ -152,9 +152,9 @@ sub process_request {
     # check for suspicious addresses
     foreach my $element (@bad_addr) {
       if ($voter_addr =~ /^$element/) {
-        my (@votes, @set, $ballot_id); # irrelevant, but necessary for UVmenu::menu()
+        my (@votes, @set, $ballot_id, $voting); # irrelevant, but necessary for UVmenu::menu()
         my @errors = ('SuspiciousAccountBallot');
-        my $res = UVmenu::menu(\@votes, \@header, $body, \$voter_addr, \$voter_name, \$ballot_id, \@set, \@errors);
+        my $res = UVmenu::menu(\@votes, \@header, $body, \$voter_addr, \$voter_name, \$ballot_id, \$voting, \@set, \@errors);
 
         # "Ignore": don't deliver a ballot
         return 0 if ($res eq 'i');
