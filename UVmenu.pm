@@ -60,6 +60,7 @@ sub menu {
   while (1) {
 
     system($config{clearcmd});
+    print "-> $config{votename} <-\n";
     print UVmessage::get("MENU_PROBLEMS") . "\n";
 
     foreach my $error (keys %errors) {
