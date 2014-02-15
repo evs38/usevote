@@ -12,7 +12,8 @@ group-more            := value group | drop-words 40 | create-lines 40
 
 Ergebnisse [$votename-first]
 [@votename-more|           [$line]\n]
-([$numvalid] gueltige Stimmen)
+
+Es wurden [$numvalid] gueltige Stimmen abgegeben.
 
  Ja  Nein : J>=N? Ja/Nein : ang.? : Gruppe
 ---- ---- : ----- ------- : ----- : ---------------------------------------
