@@ -135,16 +135,6 @@ if ($clean) {
   my $thisresult = "ergebnis-" . $ext;
   my $thisvotes = "stimmen-" . $ext;
   
-  # POP3 not activated: rename votes file
-  unless ($config{pop3}) {
-    print UVmessage::get("VOTE_RENAMING_MAILBOX"), "\n";
-    rename ($config{votefile}, "$config{tmpdir}/$thisvotes")
-       or die UVmessage::get("ERR_RENAME_MAILFILE") . "$!\n\n";
-  
-    #  wait, so that current mail deliveries can finalize
-    sleep 2;
-  }
-
   # open results file
   open (RESULT, ">>$config{tmpdir}/$thisresult")
      or die UVmessage::get("VOTE_WRITE_RESULTS", (FILE=>$thisresult)) . "\n\n";
