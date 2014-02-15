@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 ###############################################################################
-# UseVoteGer 4.09 Wahldurchfuehrung
-# (c) 2001-2005 Marc Langer <uv@marclanger.de>
+# UseVoteGer 4.11 Wahldurchfuehrung
+# (c) 2001-2012 Marc Langer <uv@marclanger.de>
 # 
 # This script package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Public License as published by the
@@ -122,9 +122,9 @@ if ($clean) {
   # normally unixtime is sufficient, if it is not unique append our PID
   my $ext = time;
 
-  opendir (DIR, $config{tmpdir});
-  my @tmpfiles = readdir (DIR);
-  closedir (DIR);
+  opendir (TMP, $config{tmpdir});
+  my @tmpfiles = readdir (TMP);
+  closedir (TMP);
   opendir (FERTIG, $config{archivedir});
   my @fertigfiles = readdir (FERTIG);
   closedir (FERTIG);
@@ -135,16 +135,6 @@ if ($clean) {
   my $thisresult = "ergebnis-" . $ext;
   my $thisvotes = "stimmen-" . $ext;
   
-  # POP3 not activated: rename votes file
-  unless ($config{pop3}) {
-    print UVmessage::get("VOTE_RENAMING_MAILBOX"), "\n";
-    rename ($config{votefile}, "$config{tmpdir}/$thisvotes")
-       or die UVmessage::get("ERR_RENAME_MAILFILE") . "$!\n\n";
-  
-    #  wait, so that current mail deliveries can finalize
-    sleep 2;
-  }
-
   # open results file
   open (RESULT, ">>$config{tmpdir}/$thisresult")
      or die UVmessage::get("VOTE_WRITE_RESULTS", (FILE=>$thisresult)) . "\n\n";
@@ -283,7 +273,7 @@ sub process_vote {
     # this matches on a single appearance:
     if ($$body =~ /#$votenum\W*?\[(.+)\]/) {
       # one or more vote strings were found
-      $onevote = 1;
+      $onevote ||= 1; # set $onevote to 1 if it was 0
       my $votestring = $1;
       if ($votestring =~ /^\W*$config{ja_stimme}\W*$/i) {
         $vote = "J";
