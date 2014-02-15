@@ -273,7 +273,7 @@ sub process_vote {
     # this matches on a single appearance:
     if ($$body =~ /#$votenum\W*?\[(.+)\]/) {
       # one or more vote strings were found
-      $onevote = 1;
+      $onevote ||= 1; # set $onevote to 1 if it was 0
       my $votestring = $1;
       if ($votestring =~ /^\W*$config{ja_stimme}\W*$/i) {
         $vote = "J";
