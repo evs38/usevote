@@ -108,7 +108,7 @@ sub menu {
       open (DIFF, "|$config{diff} - $config{sampleballotfile} | $config{pager}");
       print DIFF $$body, "\n";
       close (DIFF);
-      
+
     } elsif ($input eq '1') {
       system($config{clearcmd});
       # ignore SIGPIPE (Bug in more and less)
