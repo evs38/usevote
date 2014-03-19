@@ -90,8 +90,9 @@ sub read_config {
              nein_stimme          => '(N\s*E\s*I\s*N|N|(D\s*A\s*)?G\s*E\s*G\s*E\s*N)',
              enth_stimme          => '(E|E\s*N\s*T\s*H\s*A\s*L\s*T\s*U\s*N\s*G)',
              ann_stimme           => 'A\s*N\s*N\s*U\s*L\s*L\s*I\s*E\s*R\s*U\s*N\s*G',
+             bdsg_confirm         => 'JA',
              condition1           => '$yes>=2*$no', # twice as many yes as no
-             condition2           => '$yes>=60',    # min 60 yes votes
+             condition2           => '$yes>=50',    # min 50 yes votes
              prop_formula         => '$yes/$no',
              tpl_ack_mail         => 'ack-mail',
              tpl_bouncelist       => 'bouncelist',
@@ -118,6 +119,7 @@ sub read_config {
              tpl_rule_violated    => 'rule-violated',
              begin_divider        => 'Alles vor dieser Zeile bitte loeschen',
              end_divider          => 'Alles nach dieser Zeile bitte loeschen',
+             ballotintro          => 'WAHLSCHEIN fuer',
              nametext             => 'Dein Realname, falls nicht im FROM-Header:',
              nametext2            => 'Waehlername:',
              addresstext          => 'Waehleradresse:',
