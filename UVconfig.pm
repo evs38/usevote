@@ -18,7 +18,7 @@ require Exporter;
 $VERSION = "0.18";
 
 # Usevote version
-$usevote_version = "UseVoteGer 4.11";
+$usevote_version = "UseVoteGer 4.12";
 
 sub read_config {
 
@@ -27,6 +27,7 @@ sub read_config {
   # Default configuration options (overwritten in usevote.cfg)
   %config = (votefile             => "votes",
              votename             => "unkonfiguriertes Usevote",
+             sampleballotfile     => "ballot.sample",
              resultfile           => "ergebnis.alle",
              rulefile             => "usevote.rul",
              badaddrfile          => "mailpatterns.cfg",
@@ -57,6 +58,7 @@ sub read_config {
              mailcc               => "",
              sleepcmd             => "sleep 1",
              clearcmd             => "clear",
+             diff                 => "diff",
              pager                => "less",
              pop3                 => 0,
              pop3server           => "localhost",
